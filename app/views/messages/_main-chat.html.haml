@@ -1,0 +1,35 @@
+.main-chat
+  .header
+    .left-header
+      .left-header__title
+        ゼルダの伝説　夢を見る島
+      .left-header__member
+        .member
+          カナリア
+    .right-header
+      .right-header__button
+        = link_to edit_group_path(current_user) do
+          Edit
+
+  .messages
+    .message
+      .upper-message
+        .upper-message__user-name
+          カナリア
+        .upper-message__date
+          2019/11/08(Fri) 13:30:40
+      .lower-message
+        .lower-message__content
+          新作出ました
+
+  .form
+    .message
+    .form__mask
+      %input.from__mask{placeholder: " type a message", value: ""}
+      .form__mask__image
+        %label.from__image
+          = icon 'far','image'
+          %input{type: "file", class: "hidden"}
+    .form__send-btn
+      = link_to '#' do
+        Send
