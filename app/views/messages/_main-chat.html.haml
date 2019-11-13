@@ -2,34 +2,25 @@
   .header
     .left-header
       .left-header__title
-        ゼルダの伝説　夢を見る島
+        = @group.name
       .left-header__member
         .member
-          カナリア
+          Menber :
+          - @group.users.each do |user|
+            = user.name
     .right-header
       .right-header__button
         = link_to edit_group_path(current_user) do
           Edit
 
   .messages
-    .message
-      .upper-message
-        .upper-message__user-name
-          カナリア
-        .upper-message__date
-          2019/11/08(Fri) 13:30:40
-      .lower-message
-        .lower-message__content
-          新作出ました
+    = render partial: 'message', collection: @messages
 
   .form
-    .message
-    .form__mask
-      %input.from__mask{placeholder: " type a message", value: ""}
-      .form__mask__image
-        %label.from__image
-          = icon 'far','image'
-          %input{type: "file", class: "hidden"}
-    .form__send-btn
-      = link_to '#' do
-        Send
+    = form_for [@group, @message] do |f|
+      = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+      .form__mask
+        = f.label :image, class: 'form__mask__image' do
+          = icon('fas', 'image', class: 'icon')
+          = f.file_field :image, class: 'hidden'
+      = f.submit 'Send', class: 'form__submit'
